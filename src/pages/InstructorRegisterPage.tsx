@@ -1,5 +1,7 @@
+import InstructorRegisterForm from "../features/auth/components/InstructorRegisterForm";
+
 const InstructorRegisterPage = () => {
-    return <div>InstructorRegisterPage</div>;
+    return <InstructorRegisterForm/>
 };
 
 export default InstructorRegisterPage;
