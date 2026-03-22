@@ -5,7 +5,7 @@ import RegisterPage from "./pages/RegisterPage";
 import InstructorRegisterPage from "./pages/InstructorRegisterPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import DashboardPage from "./pages/DashboardPage";
-import InstructorPage from "./pages/InstructorPage";
+import InstructorDashboardPage from "./pages/InstructorDashboardPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -28,7 +28,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
           <Route element={<ProtectedRoute allowedRoles={['Instructor']} />}>
-            <Route path="/instructor" element={<InstructorPage />} />
+            <Route path="/instructor" element={<InstructorDashboardPage />} />
           </Route>
           <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
             <Route path="/admin" element={<AdminDashboardPage />} />
