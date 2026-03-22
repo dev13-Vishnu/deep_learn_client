@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AlertCircle, Loader2, Lock, Mail, ShieldCheck } from "lucide-react";
 
 const AdminLoginForm = () => {
-    const { login, isLoading } = useAuth();
+    const { login, logout, isLoading } = useAuth();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -23,6 +23,7 @@ const AdminLoginForm = () => {
        try {
         const user = await login({email, passwordRaw});
         if(user.role !== 'Admin') {
+            logout();
             setError('You do not have permission to login as admin');
             return;
         }
