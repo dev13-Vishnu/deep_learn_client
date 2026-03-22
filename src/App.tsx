@@ -8,25 +8,33 @@ import DashboardPage from "./pages/DashboardPage";
 import InstructorPage from "./pages/InstructorPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
+import MainLayout from "./components/MainLayout";
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/register/instructor" element={<InstructorRegisterPage />} />
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route element={<ProtectedRoute allowedRoles={['Student']} />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register/instructor" element={<InstructorRegisterPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
         </Route>
-        <Route element={<ProtectedRoute allowedRoles={['Instructor']} />}>
-          <Route path="/instructor" element={<InstructorPage />} />
+
+        <Route element={<MainLayout />}>
+          <Route element={<ProtectedRoute allowedRoles={['Student']} />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Route>
+          <Route element={<ProtectedRoute allowedRoles={['Instructor']} />}>
+            <Route path="/instructor" element={<InstructorPage />} />
+          </Route>
+          <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
+            <Route path="/admin" element={<AdminDashboardPage />} />
+          </Route>
         </Route>
-        <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
-          <Route path="/admin" element={<AdminDashboardPage />} />
-        </Route>
+
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
       </BrowserRouter>
